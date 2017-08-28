@@ -38,3 +38,20 @@ export function encodeSpaces(url) {
 
   return url;
 }
+
+// export function encodeSpaces(url) {
+//   if (!url || url.length === 0) {
+//     return url;
+//   }
+//   let result = "";
+//   for (let i = 0; i < url.length; i++) {
+//     let letter = url[i];
+//     if (letter === ' ') {
+//       result += '%20';
+//     } else {
+//       result += letter;
+//     }
+//   }
+//   console.log('result', result)
+//   return result;
+// }
