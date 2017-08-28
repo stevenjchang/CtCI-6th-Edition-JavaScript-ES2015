@@ -111,7 +111,9 @@ export class BlackJackGameAutomator {
     this.hands.forEach((hand, i) => {
       process.stdout.write('Hand ' + i + ' (' + hand.score() + '): ');
       hand.print();
-      console.log('');
+      //  !!!!!!!!!! uncomment this console.log
+      // console.log('');  
+      //  !!!!!!!!!! uncomment this console.log
     });
   }
 }
