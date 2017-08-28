@@ -16,7 +16,7 @@
  * @param  {string}  str2 The second string
  * @return {boolean}      True if strings are 0 or 1 edit apart, otherwise false
  */
-export function isOneOrLessAway(str1, str2) {
+export function _isOneOrLessAway(str1, str2) {
   // if lengths differ by more than 1 then can't be true
   if (Math.abs(str1.length - str2.length) > 1) {
     return false;
@@ -42,3 +42,42 @@ export function isOneOrLessAway(str1, str2) {
 
   return true;
 }
+
+export function isOneOrLessAway(str1, str2) {
+  let max = Math.max(str1.length, str2.length);
+  let min = Math.min(str1.length, str2.length);
+  if (max === min) {
+    return checkReplaceChar(str1, str2);
+  } else if (max - min === 1) {
+    let longerStr  = max === str1.length ? str1: str2;
+    let shorterStr = min === str1.length ? str1: str2;
+    return checkAddChar(longerStr, shorterStr);
+  } else {
+    return false;
+  }
+}
+
+//helper functions
+let checkReplaceChar = (str1, str2) => {
+  let unmatched = 0;
+  for (let i = 0; i < str1.length; i++) {
+    if (str1[i] !== str2[i]) {
+      unmatched++;
+    }
+  }
+  return unmatched < 2;
+};
+
+let checkAddChar = (long, short) => {
+  let unmatched = 0;
+  for (let i = 0; i < short.length; i++) {
+    if (long[i] !== short[i]) {
+      long = long.slice(0,i) + long.slice(i+1);
+      unmatched++;
+      if (unmatched > 1) {
+        break;
+      }
+    }
+  }
+  return unmatched < 2;
+};
