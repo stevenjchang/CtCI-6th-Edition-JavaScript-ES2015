@@ -11,7 +11,7 @@
  * @param  {string} str [description]
  * @return {[type]}     [description]
  */
-export function compressString(str) {
+export function _compressString(str) {
   if (!str) {
     return str;
   }
@@ -30,4 +30,28 @@ export function compressString(str) {
   }
 
   return cStr.length < str.length ? cStr : str;
+}
+
+export function compressString(str) {
+  if (str === null || str === undefined) {
+    return str;
+  }
+  let result = '';
+  let count = 0;
+  for (let i = 0; i < str.length; i++) {
+    let prev  = str[i - 1] || str[0];
+    let curr  = str[i];
+    // console.log('count', count)
+    if (i === str.length - 1 && prev === curr) {
+      result += ('' + (count + 1)) + prev;      
+    } else if (i === str.length - 1 && prev !== curr) {
+      result += ('' + count) + prev + '1' + curr;
+    } else if (prev === curr) {
+      count++;
+    } else if (prev !== curr) {
+      result += ('' + count) + prev;
+      count = 1;
+    } 
+  }
+  return result.length < str.length ? result : str;
 }
